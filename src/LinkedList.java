@@ -8,9 +8,16 @@
 public class LinkedList<E> {
 
     private class Node<E> {
+            private E value;
+            private Node<E> next;
+            Node(E value) {
+                this.value  = value;
+                this.next = null;
+            }
 
     }
 
+    private Node<E> head;
     public LinkedList() {
 
     }
