@@ -44,16 +44,14 @@ public class LinkedList<E> {
 
     public void append(E value) {
         Node<E> newNode = new Node<>(value);
-        if(isEmpty()){
+        if (isEmpty())
             head = newNode;
-        }
-        else{
+        else {
             Node<E> current = head;
-            while(current.getNext() != null){
+            while (current.getNext() != null)
                 current = current.getNext();
-                
-                current.setNext(newNode);
-            }
+            // at this point current (for sure) points to the tail node!
+            current.setNext(newNode);
         }
     }
 
@@ -81,11 +79,38 @@ public class LinkedList<E> {
     }
 
     public E get(int index) {
-        return null;
+        if(index < 0 )
+            throw new ArrayIndexOutOfBoundsException();
+        int currentIndex = 0;
+        Node<E> current = head;
+        while(currentIndex < index && current != null){
+            currentIndex++;
+            current = current.getNext();
+        }
+        // when current is null after the loop above it means that the given index is invalid
+        if(current == null){
+            throw new ArrayIndexOutOfBoundsException();
+        }// at this point current is NOT null AND therefore currentIndex = index (or, in other words, current
+        // is pointing to the node we want)
+        current.setValue(current.getValue());
+        return current.getValue();
     }
 
     public void set(int index, E value) {
-
+        if(index < 0 )
+            throw new ArrayIndexOutOfBoundsException();
+        int currentIndex = 0;
+        Node<E> current = head;
+        while(currentIndex < index && current != null){
+            currentIndex++;
+            current = current.getNext();
+        }
+        // when current is null after the loop above it means that the given index is invalid
+        if(current == null){
+            throw new ArrayIndexOutOfBoundsException();
+        }// at this point current is NOT null AND therefore currentIndex = index (or, in other words, current
+        // is pointing to the node we want)
+        current.setValue(value);
     }
 
     public void insert(int index, E value) {
